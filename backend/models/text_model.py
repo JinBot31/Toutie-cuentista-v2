@@ -13,7 +13,7 @@ class TextGenerationModel:
             self.tokenizer = AutoTokenizer.from_pretrained(self.model_checkpoint)
             self.model = AutoModelForCausalLM.from_pretrained(
                 self.model_checkpoint,
-                torch_dtype=torch.float32,
+                torch_dtype=torch.float16,
                 device_map="cuda"
             )
     
