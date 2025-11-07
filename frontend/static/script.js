@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generateStory(format) {
         const inputText = storyInput.value;
-
+       
         if (inputText.trim() === "") {
             outputArea.innerHTML = `
                 <div class="placeholder">

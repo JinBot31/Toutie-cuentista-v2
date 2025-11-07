@@ -274,15 +274,15 @@
                 <div class="card">
                     <h3 style="margin:0 0 10px 0; font-size:15px;">Opciones</h3>
                     <nav class="options-menu" aria-label="Opciones de salida">
-                        <button class="option-btn story" type="button">
+                        <button class="option-btn story" id="btn-text" type="button">
                             <div class="icon"><img src="../images/thinking.png" alt="Cuento" style="width:40px;height:40px;object-fit:contain;border-radius:8px" /></div>
                             <span class="option-label">Cuento</span>
                         </button>
-                        <button class="option-btn pict" type="button">
+                        <button class="option-btn pict" id="btn-pictogram" type="button">
                             <div class="icon"><img src="../images/with_phone.png" alt="Pictograma" style="width:40px;height:40px;object-fit:contain;border-radius:8px" /></div>
                             <span class="option-label">Pictograma</span>
                         </button>
-                        <button class="option-btn audio" type="button">
+                        <button class="option-btn audio" id="btn-audio" type="button">
                             <div class="icon"><img src="../images/with_phone_2.png" alt="Audio" style="width:40px;height:40px;object-fit:contain;border-radius:8px" /></div>
                             <span class="option-label">Audio</span>
                         </button>
@@ -294,13 +294,14 @@
                     <div class="preview">
                         <div>
                             <div class="small">Aquí se mostrará una vista previa</div>
-                            <div style="margin-top:8px; color:var(--muted); font-size:13px;">(imágenes, pictogramas o controles de audio)</div>
+                            <div id="output" style="margin-top:8px; color:var(--muted); font-size:13px;">(imágenes, pictogramas o controles de audio)</div>
                         </div>
                     </div>
                 </div>
             </aside>
         </div>
     </div>
+    <script src="endpoints.js"></script>
 </body>
 </html>
 
