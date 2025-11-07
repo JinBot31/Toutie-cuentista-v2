@@ -1,45 +1,123 @@
-# Cuentista para autistas
+# 🌈 CiberPaz 2025 – Cuentista Interactivo para Niños con Autismo
 
-Cuentista para autistas es una aplicación diseñada como una herramienta educativa interactiva que adapta cualquier texto a las necesidades sensoriales y cognitivas de niños con autismo y problemas de atención, utilizando opciones personalizables para el ritmo, el tono y el contenido de las historias. Además de permitir seleccionar el método de salida (texto, voz, pictogramas)
+<p align="center">
+  <img src="https://img.shields.io/badge/FastAPI-0.115-green" />
+  <img src="https://img.shields.io/badge/Python-3.11-blue" />
+  <img src="https://img.shields.io/badge/IA%20Local-Sí-purple" />
+</p>
 
-## Características principales
+El proyecto **CiberPaz 2025** es una aplicación diseñada para apoyar el aprendizaje y la comunicación de niños con autismo a través de **tres inteligencias artificiales locales**:
 
-- **Interactividad con el usuario**: Permite a los niños o a sus acompañantes seleccionar opciones que influyen en la narrativa.
-- **Selección de salida**: Ofrece diferentes métodos de presentación de la historia, como texto, voz o pictogramas, para adaptarse a las preferencias del usuario o a sus necesidades sensoriales.
-- **Interfaz amigable**: Diseñada para ser intuitiva y fácil de usar, con un enfoque en la accesibilidad para niños.
+- 🧠 **Generación de texto** (Modelo: Qwen)
+- 🗣️ **Síntesis de voz** (Modelo: XTTS v2)
+- 🖼️ **Representación visual** mediante pictogramas
 
-## Planteamiento del problema
+Este sistema transforma historias en narraciones adaptadas, acompañadas de audio y representaciones visuales, con el fin de mejorar la accesibilidad y comprensión.
 
-De cada 36 niños, 1 es diagnosticado con Trastorno del Espectro Autista (TEA). Muchos de estos niños enfrentan desafíos en la comunicación y la interacción social, lo que puede dificultar su participación en actividades narrativas tradicionales. Cuetista para autistas busca proporcionar una herramienta que facilite la narración de historias adaptadas a sus necesidades, promoviendo el desarrollo del lenguaje y la imaginación de una manera accesible y atractiva. Al ofrecer opciones personalizables y métodos de salida variados, la aplicación ayuda a superar las barreras sensoriales y cognitivas que pueden impedir que estos niños disfruten plenamente de las historias.
+---
 
-## Uso
+## 📂 Estructura del Proyecto
 
-### Requerimientos
+CiberPaz-2025/
 
-Se requiere que el equipo tenga descargado con anterioridad docker
+│ main.py
 
-### Instalación
+│ pyproject.toml
 
-Para instalar y utilizar Cuentista para autistas, sigue estos pasos:
+│ .env (opcional)
 
-1. **Clona el repositorio**:
+│
 
-   ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   ```
+├── backend/
 
-2. **Crea la imagen del proyecto**:
+│ ├── config/settings.py
 
-   ```bash
-   cd CiberPaz-2025
-   sudo docker build -t cuentista . 
-   ```
+│ ├── controllers/
 
-3. **Genera un contenedor de la imagen**:
+│ ├── services/
 
-   ```bash
-   sudo docker run -p 8000:8000 cuentista:latest
-   ```
+│ └── models/
 
-4. **Accede a la aplicación**:
-   Abre tu navegador web y ve a `http://localhost:8000/` para interactuar con la aplicación.
+│
+
+├── frontend/
+
+│ └── static/
+
+│ ├── index.html
+
+│ ├── script.js
+
+│ └── style.css
+
+│
+
+└── resources/
+
+└── audio/output/ # Aquí se guardan los audios generados
+
+---
+
+## ⚙️ Requisitos Previos
+
+| Software / Requisito | Versión |
+|----------------------|---------|
+| Python               | **3.11 (Obligatorio)** |
+| pip                  | Última versión |
+| Torch + CUDA (Opcional) | Para acelerar procesamiento en GPU |
+| GPU NVIDIA (Opcional) | Mejora tiempos de generación de texto y voz |
+
+> **Sin GPU → Funciona igual, solo más lento.**
+
+---
+
+## 🚀 Instalación
+
+```bash
+### 1. Clonar el repositorio
+git clone https://github.com/tu-org/CiberPaz-2025.git
+cd CiberPaz-2025
+### 2.Crear entorno virtual 
+python3.11 -m venv venv
+
+linux/mac 
+
+source venv/bin/activate
+
+windows 
+
+venv/Scripts/activate 
+
+### 3.Instalar dependencias 
+
+pip install --upgrade pip
+pip install -e .
+
+En caso de error con el audio ejecutar:
+
+pip install soundfile TTS torchaudio
+
+
+### Ejecutar backend(API) 
+
+python main.py
+
+La api se ejecutará en: 
+
+http://localhost:8000
+
+### Ejecutar la interfaz web 
+
+cd frontend/static
+python -m http.server 9090
+
+Luego abrir en navegador:
+
+http://localhost:9090
+
+### Variables de entorno (Opcionales)
+
+Crear un archivo .env en la raíz y colocar 
+
+APP_NAME="Cuentista para Autistas"
+VOICE_MODEL="tts_models/multilingual/multi-dataset/xtts_v2"
