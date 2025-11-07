@@ -14,12 +14,16 @@ class Settings(BaseSettings):
     
     cors_origins: list = [
         "http://localhost",
-        "http://localhost:9090",
         "http://localhost:8000",
+        "http://localhost:9090",
+        "http://localhost:5500",
+        "http://127.0.0.1",
+        "http://127.0.0.1:8000",
+        "http://127.0.0.1:9090",
+        "http://127.0.0.1:5500",
     ]
     
     class Config:
         env_file = ".env"
-
 
 settings = Settings()

@@ -24,13 +24,22 @@ app.add_middleware(
 app.include_router(text_router)
 app.include_router(voice_router)
 app.include_router(pictogram_router)
-app.mount("/frontend/static", StaticFiles(directory="frontend/static"), name="static")
-
+# Serve frontend files from the `frontend/view` folder (this repo uses `frontend/view/index.html`)
+try:
+    app.mount("/frontend/static", StaticFiles(directory="frontend/view"), name="static")
+except Exception:
+    # If the folder is not present, skip static mounting to keep the API running
+    pass
 
 
 @app.get("/")
 def serve_index():
-    return FileResponse("frontend/static/index.html")
+    # Serve the shipped index if present, otherwise return a simple JSON welcome
+    import os
+    index_path = "frontend/view/index.html"
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return {"message": "Cuentista para Autistas API", "version": settings.app_version}
 
 @app.get("/info")
 async def root():

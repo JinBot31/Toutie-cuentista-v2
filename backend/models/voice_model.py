@@ -4,11 +4,10 @@ import random
 import torch
 from pathlib import Path
 
-
 class VoiceGenerationModel:
     def __init__(self, model_name: str = "tts_models/multilingual/multi-dataset/xtts_v2"):
         self.model_name = model_name
-        self.tts = None
+        #self.tts = None
         self.voices_dir = Path(__file__).parent / "voices"
         self.available_voices = list(self.voices_dir.glob("*.wav"))
         
