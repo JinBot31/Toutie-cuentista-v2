@@ -32,7 +32,7 @@ body {
     overflow: hidden;   /* Evita que el fondo rotado se desborde */
 }
 
-/* --- Capa de marca de agua (Sin SVG) --- */
+/* --- Capa de marca de agua (Alternativa con 1 sola imagen) --- */
 body::before {
     content: '';
     position: fixed; /* Cubre toda la pantalla, sin importar el scroll */
@@ -46,46 +46,17 @@ body::before {
     opacity: 0.08; /* Muy sutil */
     transform: rotate(-30deg); /* ¡La inclinación! */
 
-    /* ----- Aquí está la magia ----- */
+    /* ----- La Solución Alternativa ----- */
     
-    /* 1. Lista de todas tus imágenes */
-    background-image: 
-        url('/CiberPaz-2025/frontend/resources/hands_up.png'),
-        url('/CiberPaz-2025/frontend/resources/happy.png'),
-        url('/CiberPaz-2025/frontend/resources/hello.png'),
-        url('/CiberPaz-2025/frontend/resources/right.png'),
-        url('/CiberPaz-2025/frontend/resources/sit_down.png'),
-        url('/CiberPaz-2025/frontend/resources/thinking.png'),
-        url('/CiberPaz-2025/frontend/resources/walking.png'),
-        url('/CiberPaz-2025/frontend/resources/with_phone.png'),
-        url('/CiberPaz-2025/frontend/resources/with_phone_2.png');
+    /* 1. Usamos UNA sola imagen */
+    /* Asegúrate de que esta ruta sea correcta */
+    background-image: url('/CiberPaz-2025/frontend/resources/happy.png');
     
-    /* 2. Tamaño de cada imagen */
-    background-size: 100px 100px;
+    /* 2. Definimos el tamaño de esa imagen */
+    background-size: 456px 591px; /* Un poco más grande para que no se vea tan repetitivo */
     
-    /* 3. Posición de cada imagen (creando una cuadrícula de 3x3) */
-    background-position: 
-        0px 0px,     /* Fila 1, Col 1 */
-        100px 0px,   /* Fila 1, Col 2 */
-        200px 0px,   /* Fila 1, Col 3 */
-        0px 100px,   /* Fila 2, Col 1 */
-        100px 100px, /* Fila 2, Col 2 */
-        200px 100px, /* Fila 2, Col 3 */
-        0px 200px,   /* Fila 3, Col 1 */
-        100px 200px, /* Fila 3, Col 2 */
-        200px 200px; /* Fila 3, Col 3 */
-    
-    /* 4. NO repetir cada imagen individualmente */
-    background-repeat: 
-        no-repeat,
-        no-repeat,
-        no-repeat,
-        no-repeat,
-        no-repeat,
-        no-repeat,
-        no-repeat,
-        no-repeat,
-        no-repeat;
+    /* 3. AHORA SÍ podemos usar "repeat" */
+    background-repeat: repeat; 
 }
 
 
