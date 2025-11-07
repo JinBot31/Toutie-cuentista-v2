@@ -11,3 +11,29 @@ Cuetista para autistas es una aplicación diseñada para ser un cuentista intera
 ## Problema que soluciona
 
 De cada 36 niños, 1 es diagnosticado con Trastorno del Espectro Autista (TEA). Muchos de estos niños enfrentan desafíos en la comunicación y la interacción social, lo que puede dificultar su participación en actividades narrativas tradicionales. Cuetista para autistas busca proporcionar una herramienta que facilite la narración de historias adaptadas a sus necesidades, promoviendo el desarrollo del lenguaje y la imaginación de una manera accesible y atractiva. Al ofrecer opciones personalizables y métodos de salida variados, la aplicación ayuda a superar las barreras sensoriales y cognitivas que pueden impedir que estos niños disfruten plenamente de las historias.
+
+## Instalación y uso
+
+Para instalar y utilizar Cuetista para autistas, sigue estos pasos:
+
+1. **Clona el repositorio**:
+
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   ```
+
+2. **Instala las dependencias**:
+
+   ```bash
+   cd CiberPaz-2025
+   uv sync
+   ```
+
+3. **Ejecuta la aplicación**:
+
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+4. **Accede a la aplicación**:
+   Abre tu navegador web y ve a `http://localhost:8000` para interactuar con la aplicación.
