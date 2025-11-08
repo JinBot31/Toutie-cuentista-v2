@@ -11,6 +11,10 @@ from backend.models.text_model import TextGenerationModel
 
 
 class PictogramGenerationModel:
+    """
+    Model for generating educational pictograms from text.
+    Uses text models to extract keywords and image models to create pictograms.
+    """
     def __init__(self):
         self.text_model = TextGenerationModel()
         self.image_pipe = None
@@ -76,16 +80,16 @@ class PictogramGenerationModel:
     def _extract_key_words(self, sentence: str) -> List[str]:
         if self.text_model.model is None:
             self.load_model()
-        
+
         if self.text_model.model is None:
             words = sentence.split()
             return words[:2] if len(words) >= 2 else words
-        
+
         prompt = (
-            f"Extrae SOLO el sustantivo principal (objeto, animal, persona) "
-            f"y el verbo principal de esta frase. Responde con 2 palabras separadas por coma.\n"
-            f"Frase: {sentence}\n"
-            f"Respuesta:"
+            f"Extract ONLY the main noun (object, animal, person) "
+            f"and the main verb from this sentence. Respond with 2 words separated by comma.\n"
+            f"Sentence: {sentence}\n"
+            f"Response:"
         )
         
         try:

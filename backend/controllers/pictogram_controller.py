@@ -15,11 +15,17 @@ text_service = TextGenerationService()
 
 @router.post("/generate", response_model=PictogramGenerationResponse)
 async def generate_pictogram(request: PictogramGenerationRequest):
-    """Genera pictogramas a partir de un texto ya provisto por el cliente.
+    """Generate pictograms from provided text.
 
-    Nota: el servicio puede devolver un dict (forma serializable). Para evitar
-    errores de validación de Pydantic, convertimos explícitamente a
-    `PictogramData` antes de construir la response model.
+    Note: The service may return a dict (serializable form). To avoid
+    Pydantic validation errors, we explicitly convert to
+    `PictogramData` before building the response model.
+
+    Args:
+        request (PictogramGenerationRequest): The request containing the text.
+
+    Returns:
+        PictogramGenerationResponse: The response with generated pictograms.
     """
     pictogram_data = pictogram_service.generate_pictograms(text=request.text)
 
@@ -35,10 +41,17 @@ async def generate_pictogram(request: PictogramGenerationRequest):
 
 @router.post("/from_prompt")
 async def generate_pictogram_from_prompt(request: TextGenerationRequest):
-    """
-    Flujo simple que toma un `prompt` (igual que el endpoint de texto),
-    genera la historia usando el modelo de texto y luego genera pictogramas
-    para la historia completa. Devuelve la historia y los pictogramas.
+    """Generate pictograms from a prompt by first generating text.
+
+    Simple flow that takes a `prompt` (same as text endpoint),
+    generates the story using the text model and then generates pictograms
+    for the complete story. Returns the story and the pictograms.
+
+    Args:
+        request (TextGenerationRequest): The request containing the prompt and parameters.
+
+    Returns:
+        dict: A dictionary containing the generated story and pictograms.
     """
     # 1) Generar la historia usando el servicio de texto
     story = text_service.generate_story(

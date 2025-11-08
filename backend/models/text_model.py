@@ -3,6 +3,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, set_seed
 import os
 
 class TextGenerationModel:
+    """Model class for generating text using transformer-based language models."""
     def __init__(self, model_checkpoint: str = "Qwen/Qwen2.5-1.5B-Instruct"):
         self.model_checkpoint = model_checkpoint
         self.tokenizer = None
@@ -28,6 +29,7 @@ class TextGenerationModel:
         set_seed(2024)
     
     def load_model(self):
+        """Load the text generation model and tokenizer."""
         if self.model is None:
             try:
                 self.tokenizer = AutoTokenizer.from_pretrained(
@@ -78,13 +80,22 @@ class TextGenerationModel:
                 self.tokenizer = None
     
     def _simple_fallback(self, prompt: str, max_new_tokens: int = 200) -> str:
-        """Simple fallback when model cannot be loaded"""
+        """Simple fallback when model cannot be loaded.
+
+        Args:
+            prompt (str): The original prompt for story generation.
+            max_new_tokens (int): Maximum number of tokens (unused in fallback).
+
+        Returns:
+            str: A simple fallback story.
+        """
         lines = [l.strip() for l in (prompt or "").splitlines() if l.strip()]
         lead = lines[0] if lines else "Había una vez"
         story = f"{lead}. Una pequeña aventura comenzó y el protagonista aprendió sobre la amistad y la curiosidad. Fin."
         return story
     
     def generate(self, prompt: str, max_new_tokens: int = 400) -> str:
+        """Generate text based on the given prompt."""
         if self.model is None or self.tokenizer is None:
             self.load_model()
         

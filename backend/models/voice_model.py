@@ -5,6 +5,11 @@ import torch
 from pathlib import Path
 
 class VoiceGenerationModel:
+    """
+    Model for generating speech from text using TTS.
+    Utilizes pre-trained TTS models and allows customization via speaker voices.
+    """
+
     def __init__(self, model_name: str = "tts_models/multilingual/multi-dataset/xtts_v2"):
         self.model_name = model_name
         #self.tts = None
@@ -26,7 +31,7 @@ class VoiceGenerationModel:
     
     def get_random_voice(self) -> str:
         if not self.available_voices:
-            raise ValueError("No hay archivos de voz disponibles en backend/models/voices/")
+            raise ValueError("No voice files available in backend/models/voices/")
         return str(random.choice(self.available_voices))
     
     def generate(

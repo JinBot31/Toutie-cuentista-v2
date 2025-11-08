@@ -1,7 +1,15 @@
+"""
+Service for generating personalized stories.
+Builds prompts and uses the text model to generate narratives adapted to specific parameters.
+"""
 from backend.models.text_model import TextGenerationModel
 
 
 class TextGenerationService:
+    """
+    Service that builds prompts and generates personalized stories using a text model.
+    Allows adjusting tone, complexity, story type, and other parameters.
+    """
     def __init__(self):
         self.model = TextGenerationModel()
         
@@ -27,6 +35,21 @@ class TextGenerationService:
         story_type: str = "cotidiana",
         protagonist_name: str = ""
     ) -> str:
+        """
+        Generates a personalized story from a prompt and optional parameters.
+
+        Args:
+            prompt (str): Initial prompt for the story.
+            max_tokens (int): Maximum tokens to generate.
+            tone (str): Tone of the narrative.
+            complexity (str): Level of language complexity.
+            sensory_friendly (bool): Whether to avoid intense sensory stimuli.
+            story_type (str): Type of story.
+            protagonist_name (str): Name of the protagonist.
+
+        Returns:
+            str: Generated story.
+        """
         full_prompt = self._build_prompt(
             prompt, tone, complexity, sensory_friendly, story_type, protagonist_name
         )
@@ -43,21 +66,21 @@ class TextGenerationService:
         protagonist_name: str
     ) -> str:
         instructions = [
-            f"Tipo de historia: {story_type}.",
+            f"Story type: {story_type}.",
             self.tone_instructions.get(tone, ""),
             self.complexity_instructions.get(complexity, ""),
         ]
-        
+
         if sensory_friendly:
             instructions.append(
-                "Evita ruidos fuertes, luces intensas u olores desagradables."
+                "Avoid loud noises, bright lights, or unpleasant smells."
             )
-        
-        instructions.append("Usa lenguaje literal y evita metaforas complejas.")
-        
+
+        instructions.append("Use literal language and avoid complex metaphors.")
+
         if protagonist_name:
-            instructions.append(f"El protagonista se llama {protagonist_name}.")
-        
+            instructions.append(f"The protagonist is called {protagonist_name}.")
+
         context = " ".join(instructions)
-        
+
         return f"{context}\n\n{user_prompt}"
