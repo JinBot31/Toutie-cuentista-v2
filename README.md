@@ -92,8 +92,59 @@ Este sistema transforma historias personalizadas en narraciones adaptadas, acomp
 > **NOTA**: Sin GPU, el sistema funciona completamente pero con tiempos de generación más largos (30-60s vs 5-10s).
 
 ---
+## Instalación con Docker
 
-## Instalación
+Para instalar y utilizar Cuentista para autistas, sigue estos pasos:
+
+1. **Clona el repositorio**:
+
+
+   ```bash
+
+   git clone <URL_DEL_REPOSITORIO>
+
+   ```
+
+2. **Instala las dependencias**:
+
+
+2. **Crea la imagen del proyecto**:
+
+   ```bash
+
+   cd CiberPaz-2025
+
+
+   uv sync
+
+
+   sudo docker build -t cuentista . 
+
+   ```
+3. **Ejecuta la aplicación**:
+
+3. **Genera un contenedor de la imagen**:
+
+   ```bash
+
+
+   uvicorn main:app --reload
+
+
+   sudo docker run -p 8000:8000 cuentista:latest
+
+   ```
+
+4. **Accede a la aplicación**:
+
+
+   Abre tu navegador web y ve a `http://localhost:8000/docs` para interactuar con la aplicación.
+
+
+   Abre tu navegador web y ve a `http://localhost:8000/` para interactuar con la aplicación.
+
+   
+## Alternativa de instalación
 
 ### 1. Clonar el Repositorio
 
