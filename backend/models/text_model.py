@@ -58,20 +58,20 @@ class TextGenerationModel:
                         # Load on CPU instead
                         self.model = AutoModelForCausalLM.from_pretrained(
                             self.model_checkpoint,
-                            torch_dtype=torch.float32,
+                            torch_dtype=torch.float16,
                             trust_remote_code=True,
                             low_cpu_mem_usage=True
                         )
-                        print("Model loaded on CPU with float32")
+                        print("Model loaded on CPU with float16")
                 else:
                     # Load directly on CPU
                     self.model = AutoModelForCausalLM.from_pretrained(
                         self.model_checkpoint,
-                        torch_dtype=torch.float32,
+                        torch_dtype=torch.float16,
                         trust_remote_code=True,
                         low_cpu_mem_usage=True
                     )
-                    print("Model loaded on CPU with float32")
+                    print("Model loaded on CPU with float16")
                     
             except Exception as e:
                 print(f"Failed to load model: {e}")

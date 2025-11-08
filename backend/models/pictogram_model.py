@@ -26,6 +26,36 @@ class PictogramGenerationModel:
         # se realiza mediante la API externa, por lo que no hay modelos locales para cargar aquí.
         if self.text_model.model is None:
             self.text_model.load_model()
+        
+        if self.image_pipe is None:
+            try:
+                if self.device == "cuda":
+                    try:
+                        torch.cuda.empty_cache()
+                        self.image_pipe = StableDiffusionXLPipeline.from_pretrained(
+                            self.IMAGE_MODEL,
+                            torch_dtype=torch.float16,
+                            variant="fp16"
+                        )
+                        self.image_pipe.to(self.device)
+                        print("SDXL-Turbo loaded on CUDA")
+                    except (torch.cuda.OutOfMemoryError, RuntimeError):
+                        print("CUDA failed, using CPU")
+                        self.device = "cpu"
+                        torch.cuda.empty_cache()
+                        self.image_pipe = StableDiffusionXLPipeline.from_pretrained(
+                            self.IMAGE_MODEL,
+                            torch_dtype=torch.float16
+                        )
+                else:
+                    self.image_pipe = StableDiffusionXLPipeline.from_pretrained(
+                        self.IMAGE_MODEL,
+                        torch_dtype=torch.float16
+                    )
+                    
+            except Exception as e:
+                print(f"Failed to load model: {e}")
+                self.image_pipe = None
     
     def _split_into_sentences(self, text: str) -> List[str]:
         sentences = re.split(r'[.!?]+', text)
