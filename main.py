@@ -24,13 +24,8 @@ app.add_middleware(
 app.include_router(text_router)
 app.include_router(voice_router)
 app.include_router(pictogram_router)
-# Serve frontend files from the `frontend/view` folder (this repo uses `frontend/view/index.html`)
-try:
-    app.mount("/frontend/static", StaticFiles(directory="frontend/view"), name="static")
-except Exception:
-    # If the folder is not present, skip static mounting to keep the API running
-    pass
 
+app.mount("/frontend/static", StaticFiles(directory="frontend/static"), name="static")
 
 @app.get("/")
 def serve_index():
